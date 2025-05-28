@@ -1,7 +1,7 @@
-# TaskBoard
+# Nōdo
 Uma nova rede social baseada na vida matinal e vlogs/ tarefas diarias das pessoas
 
-# 📝 TaskBoard Pro
+# 📝 Nōdo Pro
 
 [Clique aqui se você pretende virar mais um dos milhões de assinantes e apoiar o criador/eu mesmo.](https://taskboard/Pro)
 
