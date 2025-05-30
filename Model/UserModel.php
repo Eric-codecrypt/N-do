@@ -1,5 +1,7 @@
-
 <?php
+
+namespace Model;
+
 class UserModel
 {
     private $pdo;
@@ -9,22 +11,19 @@ class UserModel
         $this->pdo = $pdo;
     }
 
-    function register($username, $email, $password, $data_de_registro)
-    {
-        // Verificar se usuário já existe por username OU email
-        $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
-        $stmt = $this->pdo->prepare($sql);
+    public function register($username, $email, $password, $data_de_registro) {
+        // Verifica se username ou email já existem
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $count = $stmt->fetchColumn();
 
-        if (empty($results)) {
-            $sql = "INSERT INTO users(username, email, password, data_de_registro) VALUES (?,?,?,?)";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([$username, $email, $password, $data_de_registro]);
-            return true;
-        } else {
-            return false;
+        if ($count > 0) {
+            return false; // Já existe usuário com mesmo username ou email
         }
+
+        // Se não existe, insere
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, data_de_registro, theme_color) VALUES (?, ?, ?, ?, 'theme-base')");
+        return $stmt->execute([$username, $email, $password, $data_de_registro]);
     }
 
     public function login($email, $password)
@@ -41,20 +40,20 @@ class UserModel
         return false;
     }
 
-    public function getUserFromID($id)
-    {
-        $sql = "SELECT * FROM users WHERE id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+//    public function getUserFromID($id)
+//    {
+//        $sql = "SELECT * FROM users WHERE id = ?";
+//        $stmt = $this->pdo->prepare($sql);
+//        $stmt->execute([$id]);
+//        return $stmt->fetch(PDO::FETCH_ASSOC);
+//    }
 
     public function updateNickname($id, $username)
     {
-        // Corrigir SQL - era UPDATE * (incorreto)
         $sql = "UPDATE users SET username = ? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$username, $id]);
     }
 }
+
 ?>

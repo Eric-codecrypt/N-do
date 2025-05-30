@@ -1,4 +1,7 @@
 <?php
+
+use Controller\UserController;
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -26,19 +29,19 @@ if (file_exists($configPath)) {
     die("Erro: Arquivo config.php não encontrado em $configPath");
 }
 
-if (!class_exists('UserController')) {
+if (!class_exists('Controller\UserController')) {
     die("Erro: Classe UserController não encontrada.");
 }
 
 $Controller = new UserController($pdo);
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: User.php");
+    header("Location: user.php");
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
-$username = $Controller->getUserFromID($user_id)["username"];
+//$username = $Controller->getUserFromID($user_id)["username"];
 
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
