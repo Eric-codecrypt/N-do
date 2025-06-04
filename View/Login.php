@@ -466,13 +466,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 
 <script>
     function typeWriter(el, text, i = 0, callback = null) {
-    if (i < text.length) {
-    el.textContent += text.charAt(i);
-    setTimeout(() => typeWriter(el, text, i + 1, callback), 60);
-    } else {
-    el.setAttribute("data-text", el.textContent); // agora o glitch vai funcionar
-    if (callback) callback();
-    }
+        if (i < text.length) {
+            el.textContent += text.charAt(i);
+            setTimeout(() => typeWriter(el, text, i + 1, callback), 60);
+        } else {
+            el.setAttribute("data-text", el.textContent); // agora o glitch vai funcionar
+            if (callback) callback();
+        }
     }
 
     const glitchText = document.getElementById("glitch-text");
