@@ -1,3 +1,6 @@
+![image](https://github.com/user-attachments/assets/467c1d85-448d-431c-b454-9f56dc5dc477)
+
+
 # Nōdo
 Uma nova rede social baseada na vida matinal e vlogs/ tarefas diarias das pessoas
 
