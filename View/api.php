@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
             $_SESSION['email'] = $email;
             $_SESSION['theme_color'] = $user['theme_color'];
             $response['success'] = true;
-            $response['redirect'] = 'user.php';
+            $response['redirect'] = 'index.php';
         } else {
             $response['success'] = false;
             $response['message'] = "E-mail ou senha incorretos.";

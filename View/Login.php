@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
             $_SESSION['email'] = $email;
             $_SESSION['theme_color'] = $user['theme_color'];
 
-            header("Location: user.php");
+            header("Location: index.php");
             exit;
         } else {
             $error_message = "E-mail ou senha incorretos.";
